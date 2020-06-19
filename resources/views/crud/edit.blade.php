@@ -8,7 +8,7 @@
     	     <div class="row">
     	     <div class="col-md-6">
              <div class="form-group">
-	             <form method="post" enctype="multipart/form-data" action="{{url('/crud')}}">
+	             <form method="post" enctype="multipart/form-data" action="{{url('/crud/update')}}">
 		           {{csrf_field()}}
 		           <input type="hidden" name="id" value="{{$crud->id}}">
                      <div class="form-group">
@@ -32,8 +32,8 @@
 
                       <div class="form-group">
 		                  <label class="form-control-label">Gender</label><br/>
-		                  <input class="form-group" type="radio" name="gender" value="male" @if($crud->gender =='male') @endif>Male
-		                  <input class="form-group" type="radio" name="gender" value="female" @if($crud->gender == 'female') @endif>Female
+		                  <input class="form-group" type="radio" name="gender" value="male" @if($crud->gender =='male')checked @endif>Male
+		                  <input class="form-group" type="radio" name="gender" value="female" @if($crud->gender == 'female')checked @endif>Female
 	                  </div>
 		              <br/>
         
@@ -56,7 +56,11 @@
 
         	           <div class="form-group">
                       	 <label class="form-control-label">Upload a picture(image)</label>
-        	             <input class="form-control" type="file" name="image" value="{{asset('/crud->image')}}">
+        	             <input class="form-control" type="file" name="image" value="{{asset('$crud->image')}}">
+                             <input type="hidden" name="current_image" value="{{$crud->image}}">
+                                 @if(!empty($crud->image))
+                                 <img src="{{asset('/uploads/'  .$crud->image)}}" alt="" style="width: 100px">
+                       @endif
         	           </div>
         	           <br/>
 

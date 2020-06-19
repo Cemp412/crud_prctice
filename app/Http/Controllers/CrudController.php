@@ -50,7 +50,7 @@ class CrudController extends Controller
 
        if($data)
         {
-            return redirect('/index')->with('message','Post sucessfully Added'); //flash message session
+            return redirect('/crud')->with('message','Post sucessfully Added'); //flash message session
         }
     }
    
@@ -65,22 +65,24 @@ class CrudController extends Controller
     }
 
     public function update( Request $request){
+
+         $crud = crud::find($request->id);
+         $crud->name = $request->name;
+         $crud->email  = $request->email;
+         $crud->mobileno = $request->gender;
+         $crud->qualification = implode(',' , $request->qualification);
+         $crud->address = $request->address;
          if($request->hasFile('image'))
          {
             $file=$request->file('image');
             $filename = 'image'.time().'.'.$request->image->extension();
             $destination = storage_path('../public/upload');
-            $file = move($destination,$filename);
+            $file->move($destination,$filename);
             $path = "/".$filename;
 
 
-        $crud = crud::find($request->id);
-        $crud->name = $request->name;
-        $crud->email  = $request->email;
-        $crud->mobileno = $request->gender;
-        $crud->qualification = implode(',' , $request->qualification);
-        $crud->address = $request->address;
-        $crud->image = $request->path;
+       
+        $crud->image = $path;
         $updated = $crud->update();
 
         if($updated){
@@ -107,10 +109,8 @@ class CrudController extends Controller
 
 
 
-      public function delete($id){
-        $method = crud::find($id);
-        $method->delete();
-
+      public function delete($id = null){
+        Crud::where(['id'=>$id])->delete();
         return redirect('/crud')->with('message', 'record deleted sucessfully!');
 
    }

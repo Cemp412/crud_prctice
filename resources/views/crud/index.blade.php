@@ -34,8 +34,8 @@
 
 	<td>
 		<a href="{{url('/crud/show/' .$dat->id)}}" class="btn btn-primary">View</a>
-		<a href="{{url('/crud/' .$dat->id. '/edit')}}" class="btn btn-primary">Edit</a> 
-		<a href="{{url('/crud/delete/' .$dat->id)}}" class="btn btn-danger">Delete</a>
+		<a href="{{url('/crud/'.$dat->id.'/edit')}}" class="btn btn-primary">Edit</a> 
+		<a href="{{url('/crud/delete/'.$dat->id)}}" class="btn btn-danger">Delete</a>
 	</td>
 
 </tr>

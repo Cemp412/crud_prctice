@@ -24,4 +24,4 @@ Route::post('/crud', 'CrudController@insert');
 Route::get('/crud/show/{id}', 'CrudController@show');
 Route::get('/crud/{id}/edit', 'CrudController@edit');
 Route::post('/crud/update', 'CrudController@update');
-Route::get('/curds/delete/{id}','CrudController@delete');
+Route::get('/crud/delete/{id}','CrudController@delete');
